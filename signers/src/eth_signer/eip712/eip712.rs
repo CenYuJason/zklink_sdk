@@ -1,7 +1,8 @@
 use crate::eth_signer::error::EthSignerError;
 use crate::eth_signer::H256;
 use ethers::utils::keccak256;
-use ethers_primitives::{Address, U256};
+// use ethers_primitives::{Address, U256};
+use ethers::types::{Address, U256};
 use serde::{Deserialize, Serialize};
 pub use serde_eip712::*;
 use std::collections::HashMap;
@@ -31,7 +32,8 @@ impl EIP712Domain {
             name,
             version,
             chain_id: U256::from(layer_one_chain_id),
-            verifying_contract: Address::try_from(eth_contract_addr.as_str())
+            verifying_contract: eth_contract_addr
+            .parse::<Address>()
                 .map_err(|e| EthSignerError::Eip712Failed(e.to_string()))?,
         })
     }

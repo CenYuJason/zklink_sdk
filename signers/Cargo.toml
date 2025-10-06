@@ -6,7 +6,6 @@ publish = false
 
 [dependencies]
 ethers = { workspace = true }
-ethers_primitives =  { workspace = true }
 franklin-crypto = { workspace = true }
 hex = { workspace = true }
 js-sys = { workspace = true }

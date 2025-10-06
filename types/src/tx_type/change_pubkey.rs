@@ -7,12 +7,15 @@ use crate::params::{SIGNED_CHANGE_PUBKEY_BIT_WIDTH, TX_TYPE_BIT_WIDTH};
 use crate::prelude::ChangePubKeyBuilder;
 use crate::tx_type::validator::*;
 use crate::tx_type::{format_units, TxTrait, ZkSignatureTrait};
+use ethers::abi::Uint;
 use ethers::utils::keccak256;
+use hex::FromHex;
 use num::{BigUint, Zero};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 use zklink_sdk_signers::eth_signer::eip712::eip712::{EIP712Domain, TypedData};
-use zklink_sdk_signers::eth_signer::eip712::{BytesM, Uint};
+// use zklink_sdk_signers::eth_signer::eip712::{BytesM, Uint};
+use ethers::types::Bytes;
 use zklink_sdk_signers::eth_signer::error::EthSignerError;
 use zklink_sdk_signers::eth_signer::packed_eth_signature::PackedEthSignature;
 use zklink_sdk_signers::eth_signer::EthTypedData;
@@ -270,16 +273,16 @@ impl ChangePubKey {
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename = "ChangePubKey", rename_all = "camelCase")]
 pub(crate) struct EIP712ChangePubKey {
-    pub_key_hash: BytesM<20>,
-    nonce: Uint<32>,
-    account_id: Uint<32>,
+    pub_key_hash: Bytes,
+    nonce: Uint,
+    account_id: Uint,
 }
 
 impl From<&ChangePubKey> for EIP712ChangePubKey {
     fn from(change_pub_key: &ChangePubKey) -> Self {
-        let pub_key_hash: BytesM<20> = BytesM::from(change_pub_key.new_pk_hash.data);
-        let nonce: Uint<32> = Uint::from(change_pub_key.nonce.0);
-        let account_id: Uint<32> = Uint::from(change_pub_key.account_id.0);
+        let pub_key_hash: Bytes = Bytes::from_hex(change_pub_key.new_pk_hash.data).unwrap();
+        let nonce: Uint = Uint::from(change_pub_key.nonce.0);
+        let account_id: Uint = Uint::from(change_pub_key.account_id.0);
 
         EIP712ChangePubKey {
             pub_key_hash,

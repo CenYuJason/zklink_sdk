@@ -1,4 +1,5 @@
-pub use ethers_primitives::Address as EIP712Address;
+pub use ethers::types::Address as EIP712Address;
+// pub use ethers_primitives::Address as EIP712Address;
 pub use primitive_types::{H160, H256, U256};
 use serde::{Deserialize, Serialize};
 

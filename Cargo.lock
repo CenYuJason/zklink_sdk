@@ -6265,7 +6265,6 @@ name = "zklink_sdk_signers"
 version = "1.0.0"
 dependencies = [
  "ethers",
- "ethers_primitives",
  "franklin-crypto",
  "futures",
  "hex",

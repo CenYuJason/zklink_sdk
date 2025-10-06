@@ -3,4 +3,4 @@
 //! This module contains the necessary interfaces for obtaining a hash of the structure, which is later needed for EIP-712 signing.
 #[allow(clippy::module_inception)]
 pub mod eip712;
-pub use ethers_primitives::{BytesM, Uint};
+// pub use ethers_primitives::{BytesM, Uint};

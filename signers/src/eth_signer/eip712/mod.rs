@@ -4,3 +4,6 @@
 #[allow(clippy::module_inception)]
 pub mod eip712;
 // pub use ethers_primitives::{BytesM, Uint};
+mod enctype;
+mod definition;
+mod hashstruct;

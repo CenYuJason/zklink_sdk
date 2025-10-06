@@ -1,10 +1,13 @@
+use crate::eth_signer::eip712::definition::{TypeDefinition, eip712_type_definitions};
+use crate::eth_signer::eip712::enctype::eip712_encode_type;
+use crate::eth_signer::eip712::hashstruct::eip712_hash_struct;
 use crate::eth_signer::error::EthSignerError;
 use crate::eth_signer::H256;
 use ethers::utils::keccak256;
 // use ethers_primitives::{Address, U256};
 use ethers::types::{Address, U256};
 use serde::{Deserialize, Serialize};
-pub use serde_eip712::*;
+// pub use serde_eip712::*;
 use std::collections::HashMap;
 
 ///
